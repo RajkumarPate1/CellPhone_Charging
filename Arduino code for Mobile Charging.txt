@@ -1,0 +1,206 @@
+#include "pitches.h"
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+
+byte full[8] = {
+  0b11111,
+  0b11111,
+  0b11111,
+  0b11111,
+  0b11111,
+  0b11111,
+  0b11111,
+  0b11111,
+};
+
+byte zero[8] = {
+  0b00000,
+  0b00000,
+  0b00000,
+  0b00000,
+  0b00000,
+  0b00000,
+  0b00000,
+  0b00000,
+};
+
+int Told, Tnew, Cin, flg, k;
+float Time;
+
+int melody[] = {
+  NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
+};
+
+int noteDurations[] =
+{
+  4, 8, 8, 4, 4, 4, 4, 4
+};
+void setup()
+{
+  lcd.begin(20, 4);
+
+  lcd.createChar(1, full);
+  lcd.createChar(0, zero);
+  Tnew = 0;
+  flg = 0;
+  k = 1;
+  pinMode(9, OUTPUT);     // relay
+  pinMode(8, OUTPUT);     // buzzer
+  delay(1000);
+  
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Paid Mobile Charger");
+  lcd.setCursor(0, 1);
+  lcd.print("         by         ");
+
+  lcd.setCursor(0, 2);
+  lcd.print("   Rajkumar Patel   ");
+  lcd.setCursor(0, 3);
+  lcd.print("   Roll no.: A027   ");
+  
+  for (int thisNote = 0; thisNote < 8; thisNote++)
+  {
+    int noteDuration = 1000 / noteDurations[thisNote];
+    tone(8, melody[thisNote], noteDuration);
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    noTone(8);
+  }
+
+  delay(5000);
+  lcd.clear();
+}
+
+
+void InCoin()
+{
+  lcd.setCursor(0, 0);
+  lcd.print(" Paid Mobile Charger");
+
+  lcd.setCursor(0, 1);
+  lcd.print("  To charge mobile  ");
+
+  lcd.setCursor(0, 2);
+  lcd.print("   Please  insert   ");
+
+  lcd.setCursor(0, 3);
+  lcd.print("    Rs.1/-  Coin    ");
+}
+
+void CoinIn()
+{
+
+  lcd.setCursor(0, 0);
+  lcd.print("** Coin  Accepted **");
+  digitalWrite(8, HIGH);
+  delay(1000);
+  digitalWrite(8, LOW);
+  lcd.setCursor(0, 1);
+  lcd.print("Charging starting in");
+
+  for (int a = 5; a >= 0; a--)
+  {
+    lcd.setCursor(10, 2);
+    lcd.print(a);
+    delay(1000);
+  }
+  digitalWrite(8, HIGH);
+  delay(200);
+  digitalWrite(8, LOW);
+  delay(200);
+  digitalWrite(8, HIGH);
+  delay(200);
+  digitalWrite(8, LOW);
+}
+
+void Charging()
+{
+  digitalWrite(9, HIGH);
+  lcd.setCursor(0, 0);
+  lcd.print(" Paid Mobile Charger");
+
+  lcd.setCursor(0, 2);
+  lcd.print("Charging");
+
+  for (int b = 9; b <= 13; b++)
+  {
+    lcd.setCursor(b, 2);
+    lcd.write(1);
+
+    if (k == 1 )
+    {
+      Told = (millis() / 1000);
+      k = 0;
+    }
+    Tnew = 300 - ((millis() / 1000) - Told);
+    lcd.setCursor(0, 3);
+    lcd.print(Tnew);    lcd.print(" Seconds   ");
+    digitalWrite(8, HIGH);
+    delay(20);
+    digitalWrite(8, LOW);
+    delay(980);
+
+    if (Tnew <= 0)
+    {
+      flg = 0;
+      k = 1;
+      digitalWrite(9, LOW);
+      ThankU();
+      break;
+    }
+  }
+
+  for (int c = 9; c <= 13; c++)
+  {
+    lcd.setCursor(c, 2);
+    lcd.write(0);
+  }
+}
+
+void ThankU()
+{
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(" * Charging  Done * ");
+
+  for (int thisNote = 0; thisNote < 8; thisNote++)
+  {
+    int noteDuration = 1000 / noteDurations[thisNote];
+    tone(8, melody[thisNote], noteDuration);
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    noTone(8);
+  }
+
+  lcd.setCursor(0, 1);
+  lcd.print("Thank You for using");
+
+  lcd.setCursor(0, 3);
+  lcd.print("Paid Mobile Charger");
+
+  delay(3000);
+}
+
+void loop()
+{
+  Cin = analogRead(A0);
+
+  if (Cin > 700 && flg == 0)        // coin detected
+  {
+    lcd.clear();
+    CoinIn();
+    flg = 1;
+  }
+
+  else if (Cin < 400)
+  {
+    InCoin();
+  }
+
+  if (flg == 1)
+  {
+    lcd.clear();
+    Charging();
+  }
+}
