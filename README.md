@@ -14,3 +14,9 @@ Designed a system that will charge a cell phone when a coin is inserted for peop
 Implemented a coin recognition algorithm that detects a valid coin and signals the microcontroller to start charging the mobile through a power supply.
 
 Tools used: Arduino IDE
+
+## Objective
+
+In the world of technology, mobile phone has become a basic need of human being for communication. The basic way for communicating with each other is through telephones and mobile phones. It is only through mobile that we can communicate with anyone globally. They also provide us with multimedia functions like video, chat internet etc. and numerous of things. The use of mobiles has countless advantages. The mobile phones basically work on a battery. To use mobile phone we have to charge its battery for its continuous operation.
+As the use of mobile phone is increasing, the question for its battery life is also increasing. Developing countries such as India, we might have seen that in semi urban and rural areas, the current supply is not available at these places for several hours on daily basis. So it is important to create facility for charging the mobile wherever you are.
+The main objective of this project is to create a “Paid Mobile Charger” which can charge mobile for decided amount of time after accepting specific charges especially in public places where there is unavailability of current supply for hours.
