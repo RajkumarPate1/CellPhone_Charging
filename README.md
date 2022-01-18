@@ -22,3 +22,7 @@ In the world of technology, mobile phone has become a basic need of human being 
 As the use of mobile phone is increasing, the question for its battery life is also increasing. Developing countries such as India, we might have seen that in semi urban and rural areas, the current supply is not available at these places for several hours on daily basis. So it is important to create facility for charging the mobile wherever you are.
 
 The main objective of this project is to create a “Paid Mobile Charger” which can charge mobile for decided amount of time after accepting specific charges especially in public places where there is unavailability of current supply for hours.
+
+## System Flowchart
+
+![image](https://user-images.githubusercontent.com/94376039/149953992-1139e6d0-4c16-4cfa-9bd4-42e5f04161f0.png)
