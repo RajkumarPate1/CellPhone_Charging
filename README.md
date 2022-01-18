@@ -26,3 +26,8 @@ The main objective of this project is to create a “Paid Mobile Charger” whic
 ## System Flowchart
 
 ![image](https://user-images.githubusercontent.com/94376039/149953992-1139e6d0-4c16-4cfa-9bd4-42e5f04161f0.png)
+
+## Future Enchancements
+
+- Fast Charging Support
+- Smart Card Support
