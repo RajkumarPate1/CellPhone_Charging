@@ -9,7 +9,9 @@ Designed a system that will charge a cell phone when a coin is inserted for peop
 
 Implemented a coin recognition algorithm that detects a valid coin and signals the microcontroller to start charging the mobile through a power supply.
 
-Tools used: Arduino IDE
+## Tools used
+
+![Arduino2-IDE-LOGO](https://user-images.githubusercontent.com/94376039/150141609-d71ad866-e181-413b-8adc-6f489fb928fa.jpg)
 
 ## Objective
 
